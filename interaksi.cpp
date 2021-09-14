@@ -65,32 +65,99 @@ public:
         }
         glEnd();
 
-        //tangan kiri
 
+
+        //tangan kiri
 
         glBegin(GL_POLYGON);
         for(i=181;i<360;i++)
         {
             theta=i*3.142/180;
-            glVertex2f(15*cos(theta)+x-size-20, 15*sin(theta)+y-size+10);
+            glVertex2f(17.5*cos(theta)+x-size-22.5, 17.5*sin(theta)+y-size+10);
         }
         glEnd();
 
         glBegin(GL_POLYGON);
             glColor3ub(red, green, blue);
-            glVertex2f(-size -35 + x, size-20+ y);
-            glVertex2f(-size -5 + x,  size-20 + y);
+            glVertex2f(-size -40 + x, size-25+ y);
+            glVertex2f(-size -5 + x,  size-25+ y);
             glVertex2f(-size -5 + x, -size+10 + y);
-            glVertex2f(-size -35 + x,-size+10 + y);
+            glVertex2f(-size -40 + x,-size+10 + y);
         glEnd();
 
         glBegin(GL_POLYGON);
         for(i=0;i<181;i++)
         {
             theta=i*3.142/180;
-            glVertex2f(15*cos(theta)+x-size-20, 15*sin(theta)+y+size-20);
+            glVertex2f(17.5*cos(theta)+x-size-22.5, 17.5*sin(theta)+y+size-25);
         }
         glEnd();
+
+        //tangan Kanan
+
+        glBegin(GL_POLYGON);
+        for(i=181;i<360;i++)
+        {
+            theta=i*3.142/180;
+            glVertex2f(17.5*cos(theta)+x+size+22.5, 17.5*sin(theta)+y-size+10);
+        }
+        glEnd();
+
+        glBegin(GL_POLYGON);
+            glColor3ub(red, green, blue);
+            glVertex2f(size +40 + x, size-25+ y);
+            glVertex2f(size +5 + x,  size-25+ y);
+            glVertex2f(size +5 + x, -size+10 + y);
+            glVertex2f(size +40 + x,-size+10 + y);
+        glEnd();
+
+        glBegin(GL_POLYGON);
+        for(i=0;i<181;i++)
+        {
+            theta=i*3.142/180;
+            glVertex2f(17.5*cos(theta)+x+size+22.5, 17.5*sin(theta)+y+size-25);
+        }
+        glEnd();
+
+
+
+        //kaki kanan
+
+        glBegin(GL_POLYGON);
+            glColor3ub(red, green, blue);
+            glVertex2f(50 + x, size+ y);
+            glVertex2f(15 + x, size+ y);
+            glVertex2f(15 + x, size+50 + y);
+            glVertex2f(50 + x, size+50 + y);
+        glEnd();
+
+        glBegin(GL_POLYGON);
+        for(i=0;i<181;i++)
+        {
+            theta=i*3.142/180;
+            glVertex2f(17.5*cos(theta)+x+32.5, 17.5*sin(theta)+y+size+50);
+        }
+        glEnd();
+
+
+         //kaki kiri
+
+        glBegin(GL_POLYGON);
+            glColor3ub(red, green, blue);
+            glVertex2f(-50 + x, size+ y);
+            glVertex2f(-15 + x, size+ y);
+            glVertex2f(-15 + x, size+50 + y);
+            glVertex2f(-50 + x, size+50 + y);
+        glEnd();
+
+        glBegin(GL_POLYGON);
+        for(i=0;i<181;i++)
+        {
+            theta=i*3.142/180;
+            glVertex2f(17.5*cos(theta)+x-32.5, 17.5*sin(theta)+y+size+50);
+        }
+        glEnd();
+
 
 
 
@@ -116,6 +183,28 @@ public:
             glVertex2f((size-64)*cos(theta)+x+(size-105), (size-64)*sin(theta)+y-(size+35));
         }
         glEnd();
+
+
+
+        //antena kiri
+        glBegin(GL_POLYGON);
+            glColor3ub(red, green, blue);
+            glVertex2f(-size +5 +x, -size-100 + y); //atas kanan
+            glVertex2f(-size +0 + x, -size-100 + y); //atas kiri
+            glVertex2f(-size +30 + x, -size -60+ y); //bawah kiri
+            glVertex2f(-size +35+ x, -size -60+ y); //bawah kanan
+        glEnd();
+
+        //antena kanan
+        glBegin(GL_POLYGON);
+            glColor3ub(red, green, blue);
+            glVertex2f(size +0 +x, -size-100 + y); //atas kanan
+            glVertex2f(size -5 + x, -size-100 + y); //atas kiri
+            glVertex2f(size -35 + x, -size -60+ y); //bawah kiri
+            glVertex2f(size -30+ x, -size -60+ y); //bawah kanan
+        glEnd();
+
+
 
 
         glPopMatrix();
@@ -212,14 +301,14 @@ public:
         //ini untuk putar androidnya
         //glRotatef((float) glfwGetTime() * 30.f, 0.f, 0.f, 10.f);
 
-        glTranslatef(x,y,0);
-        glRotatef(180,0,0,1);
-        glTranslatef(-x,-y-500,0);
+        //glTranslatef(x,y,0);
+        //glRotatef(180,0,0,1);
+        //glTranslatef(-x,-y-500,0);
 
 
-        glTranslatef(320,320,0);
-        glRotatef(glfwGetTime() * -3, 0, 0, 1);
-        glTranslatef(-320,-320,0);
+        //glTranslatef(320,320,0);
+        //glRotatef(glfwGetTime() * -3, 0, 0, 1);
+        //glTranslatef(-320,-320,0);
 
 
         apa=x+ (sin(glfwGetTime())+1)/x*y;
