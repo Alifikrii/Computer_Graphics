@@ -29,6 +29,7 @@ public:
     bool tahan;
     float theta;
     int merah, hijau, biru;
+        float reset;
 
     Android()
     {
@@ -39,6 +40,7 @@ public:
         size= 70;
         tahan=false;
         theta;
+                reset=1;
 
     }
 
@@ -46,12 +48,15 @@ public:
     void display()
     {
 
+        reset=1;
         glPushMatrix();
 
-        //rotasi
-        //glTranslatef(x,y,0);
-        //glRotatef(glfwGetTime() * 3, 0, 0, 1);
-        //glTranslatef(-x,-y,0);
+                //rotasi
+        glTranslatef(x,y,0);
+        glRotatef(reset*glfwGetTime() +0.5, 0, 0, 1);
+
+        glTranslatef(-x,-y,0);
+
 
         //ini badan
         glBegin(GL_POLYGON);
@@ -80,7 +85,7 @@ public:
         for(i=181;i<360;i++)
         {
             theta=i*3.142/180;
-            glVertex2f(17.5*cos(theta)+x-size-22.5, 17.5*sin(theta)+y-size+10);
+            glVertex2f(17.5*cos(theta)+x-size-22.5, 17.5*sin(theta)+y-size+11);
         }
         glEnd();
 
@@ -106,7 +111,7 @@ public:
         for(i=181;i<360;i++)
         {
             theta=i*3.142/180;
-            glVertex2f(17.5*cos(theta)+x+size+22.5, 17.5*sin(theta)+y-size+10);
+            glVertex2f(17.5*cos(theta)+x+size+22.5, 17.5*sin(theta)+y-size+11);
         }
         glEnd();
 
@@ -243,13 +248,15 @@ public:
                 {
                     x=xpos;
                     y=ypos;
+                    reset=0;
                 }
 
             }
 
         else
             {red = 5, green = 59, blue = 99;
-            merah=hijau=biru=214;}
+            merah=hijau=biru=214;
+            }
     }
 
     void doIfKeyPressed(int key, int action){}
@@ -682,7 +689,7 @@ public:
         double left = x - size;
         double right = x + size;
         double top = y+size ;
-        double bottom =y- size-39;
+        double bottom =y- size-35;
 
         if((xpos > left) && (xpos < right) && (ypos < top) && (ypos > bottom))
             return GL_TRUE;
@@ -793,8 +800,8 @@ public:
     {
         double left = x - size;
         double right = x + size;
-        double top = y+size+39;
-        double bottom =y- size;
+        double top = y+size;
+        double bottom =y- size-50;
 
         if((xpos > left) && (xpos < right) && (ypos < top) && (ypos > bottom))
             return GL_TRUE;
@@ -842,6 +849,371 @@ public:
 I2 i2;
 
 
+// K class
+class K{
+public:
+    double x,y;
+    double prevY;
+    int red,green,blue;
+    int size, i;
+    bool tahan;
+    float theta;
+    int merah, hijau, biru;
+
+    K()
+    {
+        prevY = 0;
+        red = 5, green = 59, blue = 99;
+        merah=hijau=biru=214;
+        x=405, y=297;
+        size= 9.5;
+        tahan=false;
+        theta;
+
+    }
+
+
+    void display()
+    {
+
+        glPushMatrix();
+
+        //rotasi
+        //glTranslatef(x,y,0);
+        //glRotatef(glfwGetTime() * 3, 0, 0, 1);
+        //glTranslatef(-x,-y,0);
+
+        //ini badan
+       //ini badan
+       glBegin(GL_POLYGON);
+            glColor3ub(red, green, blue);
+            glVertex2f(-size + x,   y-48 ); //Atas Kanan
+            glVertex2f( size + x,   y-48); //Atas Kiri
+            glVertex2f( size + x,  +48+ y); //Bawah Kiri
+            glVertex2f(-size + x,  +48+ y); //Bawah Kanan
+        glEnd();
+
+        //ini tangan
+       glBegin(GL_POLYGON);
+            glColor3ub(red, green, blue);
+            glVertex2f(-size +60+ x,   y-25 ); //Atas Kanan
+            glVertex2f( size +25+ x,   y-25 ); //Atas Kiri
+            glVertex2f( size -5+   x,  +10+ y); //Bawah Kiri
+            glVertex2f(-size +30+ x,  +10+ y); //Bawah Kanan
+        glEnd();
+
+        //ini kaki
+       glBegin(GL_POLYGON);
+            glColor3ub(red, green, blue);
+            glVertex2f(-size +30+ x,   y+10 ); //Atas Kanan
+            glVertex2f( size -5+ x,   y+10 ); //Atas Kiri
+            glVertex2f( size +25+ x,  +48+ y); //Bawah Kiri
+            glVertex2f(-size +60+ x,  +48+ y); //Bawah Kanan
+        glEnd();
+
+
+
+        glPopMatrix();
+    }
+
+    GLboolean isRectangleSelected(double xpos, double ypos)
+    {
+        double left = x - size;
+        double right = x + size+40;
+        double top = y+size;
+        double bottom =y- size;
+
+        if((xpos > left) && (xpos < right) && (ypos < top) && (ypos > bottom))
+            return GL_TRUE;
+        else
+            return GL_FALSE;
+
+
+    }
+
+    void doIfSelected(double xpos, double ypos)
+    {
+        if(isRectangleSelected(xpos, ypos) == GL_TRUE)
+            {red =61; blue = 132;
+            green = 220;
+            merah=237,hijau=245, biru=224;
+
+                if(tahan==1)
+                {
+                    x=xpos;
+                    y=ypos;
+                }
+
+            }
+
+        else
+            {red = 5, green = 59, blue = 99;
+            merah=hijau=biru=214;}
+    }
+
+    void doIfKeyPressed(int key, int action){}
+    void doIfClicked(int button, int action, double xpos, double ypos){
+
+
+            if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS){
+
+                tahan=true;
+            }
+            else if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
+            {
+                tahan=false;
+            }
+
+    }
+};
+K k;
+
+
+// R class
+class R{
+public:
+    double x,y;
+    double prevY;
+    int red,green,blue;
+    int size, i;
+    bool tahan;
+    float theta;
+    int merah, hijau, biru;
+
+    R()
+    {
+        prevY = 0;
+        red = 5, green = 59, blue = 99;
+        merah=hijau=biru=214;
+        x=490, y=297;
+        size= 9.5;
+        tahan=false;
+        theta;
+
+    }
+
+
+    void display()
+    {
+
+        glPushMatrix();
+
+        //rotasi
+        //glTranslatef(x,y,0);
+        //glRotatef(glfwGetTime() * 3, 0, 0, 1);
+        //glTranslatef(-x,-y,0);
+
+        //ini badan
+       //ini badan
+       glBegin(GL_POLYGON);
+            glColor3ub(red, green, blue);
+            glVertex2f(-size + x,   y-30 ); //Atas Kanan
+            glVertex2f( size + x,   y-30); //Atas Kiri
+            glVertex2f( size + x,  +48+ y); //Bawah Kiri
+            glVertex2f(-size + x,  +48+ y); //Bawah Kanan
+        glEnd();
+
+        //Ini Kepala
+        glBegin(GL_POLYGON);
+        for(i=200;i<270;i++)
+        {
+            glColor3ub(red, green, blue);
+            theta=i*3.142/180;
+            glVertex2f(52*cos(theta)+x+41, 20*sin(theta)+y-5);
+        }
+            glVertex2f( x+40,  -6+ y);
+            glVertex2f( x+30,  -7+ y);
+            glVertex2f( x+15,  -5+ y);
+            glVertex2f( x+5,  y);
+
+
+
+
+        glEnd();
+        //ini tangan
+
+
+
+
+
+        glPopMatrix();
+    }
+
+    GLboolean isRectangleSelected(double xpos, double ypos)
+    {
+        double left = x - size;
+        double right = x + size+35;
+        double top = y+size+35 ;
+        double bottom =y- size;
+
+        if((xpos > left) && (xpos < right) && (ypos < top) && (ypos > bottom))
+            return GL_TRUE;
+        else
+            return GL_FALSE;
+
+
+    }
+
+    void doIfSelected(double xpos, double ypos)
+    {
+        if(isRectangleSelected(xpos, ypos) == GL_TRUE)
+            {red =61; blue = 132;
+            green = 220;
+            merah=237,hijau=245, biru=224;
+
+                if(tahan==1)
+                {
+                    x=xpos;
+                    y=ypos;
+                }
+
+            }
+
+        else
+            {red = 5, green = 59, blue = 99;
+            merah=hijau=biru=214;}
+    }
+
+    void doIfKeyPressed(int key, int action){}
+    void doIfClicked(int button, int action, double xpos, double ypos){
+
+
+            if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS){
+
+                tahan=true;
+            }
+            else if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
+            {
+                tahan=false;
+            }
+
+    }
+};
+R r;
+
+
+// I class
+class I3{
+public:
+    double x,y;
+    double prevY;
+    int red,green,blue;
+    int size, i;
+    bool tahan;
+    float theta;
+    int merah, hijau, biru;
+
+
+    I3()
+    {
+        prevY = 0;
+        red = 5, green = 59, blue = 99;
+        merah=hijau=biru=214;
+        x=574, y=297;
+        size= 9.5;
+        tahan=false;
+        theta;
+
+
+    }
+
+
+    void display()
+    {
+
+        glPushMatrix();
+
+
+
+        //ini badan
+       //ini badan
+       glBegin(GL_POLYGON);
+            glColor3ub(red, green, blue);
+            glVertex2f(-size + x,   y-27 ); //Atas Kanan
+            glVertex2f( size + x,   y-27); //Atas Kiri
+            glVertex2f( size + x,  +48+ y); //Bawah Kiri
+            glVertex2f(-size + x,  +48+ y); //Bawah Kanan
+        glEnd();
+
+
+        //Ini Kepala
+        glBegin(GL_POLYGON);
+        for(i=0;i<360;i++)
+        {
+            glColor3ub(red, green, blue);
+            theta=i*3.142/180;
+            glVertex2f((size+2)*cos(theta)+x, (size+2)*sin(theta)+y-48);
+        }
+        glEnd();
+
+
+        glPopMatrix();
+    }
+
+    GLboolean isRectangleSelected(double xpos, double ypos)
+    {
+        double left = x - size;
+        double right = x + size;
+        double top = y+size;
+        double bottom =y- size-70;
+
+        if((xpos > left) && (xpos < right) && (ypos < top) && (ypos > bottom))
+            return GL_TRUE;
+        else
+            return GL_FALSE;
+
+
+    }
+
+    void doIfSelected(double xpos, double ypos)
+    {
+        if(isRectangleSelected(xpos, ypos) == GL_TRUE)
+            {red =61; blue = 132;
+            green = 220;
+            merah=237,hijau=245, biru=224;
+
+                if(tahan==1)
+                {
+                    x=xpos;
+                    y=ypos;
+
+                }
+
+            }
+
+        else
+            {
+                red = 5, green = 59, blue = 99;
+                merah=hijau=biru=214;
+
+
+            }
+    }
+
+    void doIfKeyPressed(int key, int action){}
+    void doIfClicked(int button, int action, double xpos, double ypos){
+
+
+            if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS){
+
+                tahan=true;
+
+            }
+            else if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
+            {
+                tahan=false;
+
+            }
+
+
+    }
+};
+I3 i3;
+
+
+
+
+
 
 
 
@@ -869,6 +1241,10 @@ static void cursor_position_callback(GLFWwindow* window, double xpos, double ypo
     l.doIfSelected(xpos, ypos);
     i1.doIfSelected(xpos, ypos);
     f.doIfSelected(xpos, ypos);
+    i2.doIfSelected(xpos, ypos);
+    k.doIfSelected(xpos, ypos);
+    r.doIfSelected(xpos, ypos);
+    i3.doIfSelected(xpos, ypos);
     android.doIfSelected(xpos, ypos);
 }
 
@@ -882,6 +1258,10 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     l.doIfClicked(button, action, xpos, ypos);
     i1.doIfClicked(button, action, xpos, ypos);
     f.doIfClicked(button, action, xpos, ypos);
+    i2.doIfClicked(button, action, xpos, ypos);
+    k.doIfClicked(button, action, xpos, ypos);
+    r.doIfClicked(button, action, xpos, ypos);
+    i3.doIfClicked(button, action, xpos, ypos);
     android.doIfClicked(button, action, xpos, ypos);
 }
 
@@ -975,6 +1355,9 @@ int main(void) {
         i1.display();
         f.display();
         i2.display();
+        k.display();
+        r.display();
+        i3.display();
         android.display();
 
 
