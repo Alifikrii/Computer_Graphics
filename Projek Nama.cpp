@@ -59,7 +59,8 @@ public:
 
 
         //ini badan
-        glBegin(GL_POLYGON);
+        glPushMatrix();
+        glBegin(GL_QUADS);
             glColor3ub(red, green, blue);
             glVertex2f(-size + x,  size + y);
             glVertex2f( size + x,  size + y);
@@ -69,7 +70,9 @@ public:
 
         glBegin(GL_POLYGON);
 
+
         //ini kepala
+        glColor3ub(red, green, blue);
         for(i=181;i<360;i++)
         {
             theta=i*3.142/180;
@@ -1292,7 +1295,7 @@ int main(void) {
     glfwSetErrorCallback(error_callback);
     if (!glfwInit());
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
-    window = glfwCreateWindow(640, 960, "Pertemuan 4 G64190005 Interaksi", NULL, NULL);
+    window = glfwCreateWindow(640, 960, "Projek NAMA G64190005", NULL, NULL);
     if (!window){
         glfwTerminate();
     }

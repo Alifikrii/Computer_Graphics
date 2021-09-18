@@ -1,4 +1,3 @@
-
 #include <GLFW/glfw3.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -71,27 +70,33 @@
 
 
 
-          //fungsi untuk menampilkan objek
+          //fungsi untuk menampilkan objk
 
 
+          glPushMatrix();
+          //ini langit
 
 
-            glBegin(GL_TRIANGLES);
-            glColor3d(240, 247, 74);
-            glVertex2d(78.04, 240);
-            glVertex2d(181.96, 240);
-            glVertex2d(130, 162);
+            glBegin(GL_QUADS);
+            glColor3d(0,0,0);
+            glVertex2d(0,0);
+            glVertex2d(640,0);
+            glVertex2d(680,240);
+            glVertex2d(0,240);
             glEnd();
+        glPopMatrix();
 
 
-
+glPushMatrix();
             //Ini Atapnya
+
             glBegin(GL_TRIANGLES);
             glColor3d(0.619, 0.086, 0.086);
             glVertex2d(241, 281.25);
             glVertex2d(399.48, 281.25);
             glVertex2d(320.24, 162);
             glEnd();
+glPopMatrix();
 
             //ini tembooknya
             glBegin(GL_QUADS);
@@ -112,8 +117,39 @@
             glEnd();
 
 
+            //ini bulan
+            glPushMatrix();
+            glBegin(GL_POLYGON);
+
+            glColor3d(0.976, 0.968, 0.823);
+            for(i=0;i<361;i++)
+            {
+            theta=i*3.142/180;
+            glVertex2f(60*cos(theta)+90, 60*sin(theta)+70);
+            }
+            glEnd();
+
+
+            glBegin(GL_POLYGON);
+            glColor3d(0,0,0);
+            for(i=0;i<361;i++)
+            {
+            theta=i*3.142/180;
+            glVertex2f(60*cos(theta)+100, 60*sin(theta)+80);
+            }
+            glEnd();
+            glPopMatrix();
+
+
 
             //ini awan
+
+            glPushMatrix();
+
+            glTranslatef(-400,0,0);
+            glTranslatef(0+(sin(glfwGetTime())+1)/2*600,0,0);
+
+
             glBegin(GL_POLYGON);
             glColor3d(255,255,255); //sesuaikan dengan warna layar
             for(i=0;i<360;i++)
@@ -162,6 +198,78 @@
             glVertex2f(20*cos(theta)+419, 20*sin(theta)+75.5);
             }
             glEnd();
+
+
+            glPopMatrix();
+
+
+            glPushMatrix();
+
+            glTranslatef(20,100,0);
+            //glTranslatef(0+(sin(glfwGetTime())+1)/2*70,0+(sin(glfwGetTime())+1)/2*70,0);
+
+
+            glBegin(GL_POLYGON);
+            glColor3d(255,255,255); //sesuaikan dengan warna layar
+            for(i=0;i<360;i++)
+            {
+            theta=i*3.142/180;
+            glVertex2f(20*cos(theta)+439, 20*sin(theta)+85.5);
+            }
+            glEnd();
+
+            glBegin(GL_POLYGON);
+            for(i=0;i<360;i++)
+            {
+            theta=i*3.142/180;
+            glVertex2f(20*cos(theta)+459, 20*sin(theta)+64.5);
+            }
+            glEnd();
+
+            glBegin(GL_POLYGON);
+            for(i=0;i<360;i++)
+            {
+            theta=i*3.142/180;
+            glVertex2f(20*cos(theta)+473, 20*sin(theta)+72.5);
+            }
+            glEnd();
+
+            glBegin(GL_POLYGON);
+            for(i=0;i<360;i++)
+            {
+            theta=i*3.142/180;
+            glVertex2f(20*cos(theta)+459, 20*sin(theta)+81.5);
+            }
+            glEnd();
+
+            glBegin(GL_POLYGON);
+            for(i=0;i<360;i++)
+            {
+            theta=i*3.142/180;
+            glVertex2f(20*cos(theta)+433, 20*sin(theta)+64.5);
+            }
+            glEnd();
+
+            glBegin(GL_POLYGON);
+            for(i=0;i<360;i++)
+            {
+            theta=i*3.142/180;
+            glVertex2f(20*cos(theta)+419, 20*sin(theta)+75.5);
+            }
+            glEnd();
+
+
+            glPopMatrix();
+
+
+
+
+
+
+
+
+
+
 
 
 
