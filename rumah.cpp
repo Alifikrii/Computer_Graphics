@@ -395,8 +395,194 @@ void modedoIfClicked(int button, int action)
             glVertex2d(487.5, 503);
         glEnd();
 
+        //Jendela Depan Atas kecil
+
+        glBegin(GL_POLYGON);
+            glColor3d(0.466, 0.384, 0.898);
+            glVertex2d(559, 418);
+            glVertex2d(550, 412);
+            glVertex2d(559 , 407.5);
+        glEnd();
+
+        glBegin(GL_POLYGON);
+            glColor3d(0.698, 0.670, 0.937);
+            glVertex2d(559, 418);
+            glVertex2d(538, 430.5);
+            glVertex2d(538, 419);
+            glVertex2d(550, 412);
+        glEnd();
+
+        glBegin(GL_TRIANGLES);
+            glColor3d(0.329, 0.278, 0.356);
+            glVertex2d(547.5, 413);
+            glVertex2d(538, 419);
+            glVertex2d(538, 404);
+        glEnd();
+
+        glBegin(GL_TRIANGLES);
+            glColor3d(1, 0.850, 0.474); //ini warna jendela kuning yng akan  dijadikan iteraksi
+            glVertex2d(546, 412);
+            glVertex2d(538, 416.5);
+            glVertex2d(538, 404);
+        glEnd();
 
 
+        //Jendela Depan Atas besar
+
+        glBegin(GL_POLYGON);
+            glColor3d(0.466, 0.384, 0.898);
+            glVertex2d(627, 368);
+            glVertex2d(627, 424);
+            glVertex2d(617.5, 418.5);
+            glVertex2d(617.5, 373.5);
+        glEnd();
+
+        glBegin(GL_POLYGON);
+            glColor3d(0.466, 0.384, 0.898);
+            glVertex2d(634, 427);
+            glVertex2d(634, 435);
+            glVertex2d(596, 458.5);
+            glVertex2d(589.5, 454.5);
+            glVertex2d(589.5, 445.5);
+            glVertex2d(596, 449.5);
+        glEnd();
+
+
+        glBegin(GL_POLYGON);
+            glColor3d(0.466, 0.384, 0.898);
+            glVertex2d(559, 418);
+            glVertex2d(550, 412);
+            glVertex2d(559 , 407.5);
+        glEnd();
+
+        glBegin(GL_POLYGON);
+            glColor3d(0.698, 0.670, 0.937);
+            glVertex2d(617.5, 419);
+            glVertex2d(634, 427);
+            glVertex2d(596.5, 449.5);
+            glVertex2d(588, 443.5);
+            glVertex2d(595, 439);
+            glVertex2d(590, 435);
+        glEnd();
+
+        glBegin(GL_POLYGON);
+            glColor3d(0.329, 0.278, 0.356);
+            glVertex2d(618, 373);
+            glVertex2d(618, 418);
+            glVertex2d(591, 434);
+            glVertex2d(591, 388);
+        glEnd();
+        glBegin(GL_POLYGON);
+            glColor3d(1, 0.850, 0.474); //ini warna jendela kuning yng akan  dijadikan iteraksi
+            glVertex2d(616, 373);
+            glVertex2d(616, 417);
+            glVertex2d(591, 433);
+            glVertex2d(591, 388);
+        glEnd();
+
+        glBegin(GL_POLYGON);
+            glColor3d(0.329, 0.278, 0.356);
+            glVertex2d(604, 380);
+            glVertex2d(604, 425);
+            glVertex2d(601, 427);
+            glVertex2d(601, 382);
+        glEnd();
+
+        glBegin(GL_POLYGON);
+            glColor3d(0.329, 0.278, 0.356);
+            glVertex2d(617, 395);
+            glVertex2d(617, 397);
+            glVertex2d(590, 413);
+            glVertex2d(590, 411);
+        glEnd();
+
+
+
+        //Jendela depan Bawah besar
+
+        glTranslatef(0,72,0);
+        glBegin(GL_POLYGON);
+            glColor3d(0.466, 0.384, 0.898);
+            glVertex2d(627, 368);
+            glVertex2d(627, 424);
+            glVertex2d(617.5, 418.5);
+            glVertex2d(617.5, 373.5);
+        glEnd();
+
+
+
+        glBegin(GL_POLYGON);
+            glColor3d(0.698, 0.670, 0.937);
+            glVertex2d(617.5, 419);
+            glVertex2d(625, 425);
+            glVertex2d(595, 441);
+            glVertex2d(590, 435);
+        glEnd();
+
+        glBegin(GL_POLYGON);
+            glColor3d(0.329, 0.278, 0.356);
+            glVertex2d(618, 373);
+            glVertex2d(618, 418);
+            glVertex2d(591, 434);
+            glVertex2d(591, 388);
+        glEnd();
+        glBegin(GL_POLYGON);
+            glColor3d(1, 0.850, 0.474); //ini warna jendela kuning yng akan  dijadikan iteraksi
+            glVertex2d(616, 373);
+            glVertex2d(616, 417);
+            glVertex2d(591, 433);
+            glVertex2d(591, 388);
+        glEnd();
+
+        glBegin(GL_POLYGON);
+            glColor3d(0.329, 0.278, 0.356);
+            glVertex2d(604, 380);
+            glVertex2d(604, 425);
+            glVertex2d(601, 427);
+            glVertex2d(601, 382);
+        glEnd();
+    glPopMatrix();
+
+
+    //pintu
+
+    glPushMatrix();
+        glBegin(GL_POLYGON);
+            glColor3d(0.329, 0.278, 0.356);
+            glVertex2d(657, 434);
+            glVertex2d(657, 501);
+            glVertex2d(635, 514);
+            glVertex2d(635, 446);
+
+        glEnd();
+
+        glBegin(GL_POLYGON);
+            glColor3d(0.380, 0.254, 0.517);
+            glVertex2d(655, 445);
+            glVertex2d(655, 502);
+            glVertex2d(635, 514);
+            glVertex2d(635, 457);
+
+        glEnd();
+
+        glBegin(GL_POLYGON);
+            glColor3d(1, 0.850, 0.474); //ini warna kuning jendela
+            glVertex2d(652.24, 436.16);
+            glVertex2d(652.24, 442.66);
+            glVertex2d(636, 453);
+            glVertex2d(636, 446.5);
+
+        glEnd();
+
+
+        glBegin(GL_POLYGON);
+            glColor3d(1, 1, 1);
+                for(i=0;i<360;i++)
+                {
+                    theta=i*3.142/180;
+                    glVertex2f(2*cos(theta)+638, 2*sin(theta)+483);
+                }
+        glEnd();
 
     glPopMatrix();
 
@@ -405,6 +591,86 @@ void modedoIfClicked(int button, int action)
 
 }
 
+
+void matahari()
+{
+    float i, theta;
+    glPushMatrix();
+
+        glBegin(GL_POLYGON);
+                    glColor3d(0.858, 0.580, 0.086);
+                        for(i=0;i<360;i++)
+                        {
+                            theta=i*3.142/180;
+                            glVertex2f(50.25*cos(theta)+286.5, 57*sin(theta)+158);
+                        }
+        glEnd();
+
+
+        glBegin(GL_POLYGON);
+                    glColor3d(1, 0.780, 0.031);
+                        for(i=0;i<360;i++)
+                        {
+                            theta=i*3.142/180;
+                            glVertex2f(48*cos(theta)+291, 53*sin(theta)+159.5);
+                        }
+        glEnd();
+
+        //EKOR
+
+        glBegin(GL_POLYGON);
+            glColor3d(1, 0.780, 0.031);
+            glVertex2f(343,183.57);
+            glVertex2f(379,204.5);
+            glVertex2f(387.5,200);
+            glVertex2f(353.5,178);
+
+
+        glEnd();
+
+        glBegin(GL_POLYGON);
+            glColor3d(1, 0.780, 0.031);
+            glVertex2f(299,225);
+            glVertex2f(299,268);
+            glVertex2f(289,262);
+            glVertex2f(289,220);
+        glEnd();
+
+        glBegin(GL_POLYGON);
+            glColor3d(1, 0.780, 0.031);
+            glVertex2f(222,182);
+            glVertex2f(222,193);
+            glVertex2f(185,213);
+            glVertex2f(185,203);
+        glEnd();
+
+        glBegin(GL_POLYGON);
+            glColor3d(1, 0.780, 0.031);
+            glVertex2f(200,90);
+            glVertex2f(237,112);
+            glVertex2f(228,117);
+            glVertex2f(191,96);
+        glEnd();
+
+        glBegin(GL_POLYGON);
+            glColor3d(1, 0.780, 0.031);
+            glVertex2f(289,54);
+            glVertex2f(289,96);
+            glVertex2f(280,91);
+            glVertex2f(280,49);
+        glEnd();
+
+        glBegin(GL_POLYGON);
+            glColor3d(1, 0.780, 0.031);
+            glVertex2f(289,54);
+            glVertex2f(289,96);
+            glVertex2f(280,91);
+            glVertex2f(280,49);
+        glEnd();
+
+    glPopMatrix();
+
+}
 
 
 
@@ -630,6 +896,7 @@ int main(void) {
 
         //i3.display();
         rumah();
+        matahari();
 
 
 
