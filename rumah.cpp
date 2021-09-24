@@ -11,44 +11,100 @@
 #include <iterator>
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
 
 using namespace std;
 
 double Lred =0.141;
 double Lgreen=0.109;
 double Lblue =0.337;
-int count=0;
+double LampuR=1, LampuG=0.850, LampuB=0.474;
+double Tred=0.329,Tgreen=0.219,Tblue=0.517;
+double ModeL=0, ModeP=0;
 
+int count=1,countP=1;
+
+void warna()
+{
+    if(count%2==0&&Lred<0.890) //ini siang
+            {
+                Lred +=0.001; //ini ganti
+
+                //printf("%f",Lred);
+
+                Lgreen=0.305;
+                Lblue =0.545;
+                LampuR-=0.001,  LampuG=0.494, LampuB=0.682;
+                Tred=1,Tgreen=0.643,Tblue=0.368;
+                printf("Mode Siang");
+            }
+    if(count%2==1&&Lred>0.141) //ini malam
+            {
+
+                Lred -=0.001;//ini ganti
+                Lgreen=0.109;
+                Lblue =0.337;
+                LampuR=1, LampuG=0.850, LampuB=0.474;
+                Tred=0.329,Tgreen=0.219,Tblue=0.517;
+
+                printf("Mode Malam");
+
+
+            }
+}
 
 
 //Ini untuk ganti mode malam atau siang
 void modedoIfClicked(int button, int action)
     {
 
-        if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS){
+        if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS && ModeL==1){
 
             count+=1;
-            printf("%d",count);
 
+        }
+        if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS && ModeP==1){
 
-            if(count%2==0)
-            {
-                Lred =0.909;
-                Lgreen=0.905;
-                Lblue =0.847;
-
-            }
-
-            else if(count%2==1)
-            {
-                Lred =0.141;
-                Lgreen=0.109;
-                Lblue =0.337;
-
-            }
+            countP+=1;
 
         }
 }
+void isRectangleSelected(double xpos, double ypos)
+    {
+        //ini tombol
+        double left = 898;
+        double right = 976;
+        double top = 74;
+        double bottom =113.5;
+
+        double Pleft = 635.5;
+        double Pright = 684;
+        double Ptop = 434.5;
+        double Pbottom =503;
+
+
+
+        if((xpos > left) && (xpos < right) && (ypos > top) && (ypos < bottom))
+            {
+                ModeL=1;
+               // printf("Tombol x=%f, y=%f\n",xpos,ypos);
+
+            }
+        else if((xpos > Pleft) && (xpos < Pright) && (ypos > Ptop) && (ypos < Pbottom))
+            {
+                ModeP=1;
+                //printf("Pintu x=%f, y=%f, P=%d\n",xpos,ypos,countP);
+            }
+        else
+        {
+            ModeL=0;
+            ModeP=0;
+        }
+
+
+
+
+    }
 
 
 //warna layar
@@ -59,15 +115,11 @@ void modedoIfClicked(int button, int action)
             //cout << "  G" << Lgreen << endl;
             //cout << "  B" << Lblue << endl;
     //BACKGROUND
+
     glClearColor(Lred, Lgreen, Lblue, 1);
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-
-
-/*
- * CLASSES DECLARATION
- */
 
  void rumah ()
 {
@@ -388,7 +440,7 @@ void modedoIfClicked(int button, int action)
         glEnd();
 
         glBegin(GL_POLYGON);
-            glColor3d(1, 0.850, 0.474); //ini warna yang akan dijarikan jendela
+            glColor3d(LampuR,LampuG,LampuB); //ini warna yang akan dijarikan jendela
             glVertex2d(487.5, 469.5);
             glVertex2d(500.5, 477);
             glVertex2d(500.5, 511);
@@ -420,7 +472,7 @@ void modedoIfClicked(int button, int action)
         glEnd();
 
         glBegin(GL_TRIANGLES);
-            glColor3d(1, 0.850, 0.474); //ini warna jendela kuning yng akan  dijadikan iteraksi
+            glColor3d(LampuR,LampuG,LampuB); //ini warna jendela kuning yng akan  dijadikan iteraksi
             glVertex2d(546, 412);
             glVertex2d(538, 416.5);
             glVertex2d(538, 404);
@@ -473,7 +525,7 @@ void modedoIfClicked(int button, int action)
             glVertex2d(591, 388);
         glEnd();
         glBegin(GL_POLYGON);
-            glColor3d(1, 0.850, 0.474); //ini warna jendela kuning yng akan  dijadikan iteraksi
+            glColor3d(LampuR,LampuG,LampuB); //ini warna jendela kuning yng akan  dijadikan iteraksi
             glVertex2d(616, 373);
             glVertex2d(616, 417);
             glVertex2d(591, 433);
@@ -527,7 +579,7 @@ void modedoIfClicked(int button, int action)
             glVertex2d(591, 388);
         glEnd();
         glBegin(GL_POLYGON);
-            glColor3d(1, 0.850, 0.474); //ini warna jendela kuning yng akan  dijadikan iteraksi
+            glColor3d(LampuR,LampuG,LampuB); //ini warna jendela kuning yng akan  dijadikan iteraksi
             glVertex2d(616, 373);
             glVertex2d(616, 417);
             glVertex2d(591, 433);
@@ -544,45 +596,6 @@ void modedoIfClicked(int button, int action)
     glPopMatrix();
 
 
-    //pintu
-
-    glPushMatrix();
-        glBegin(GL_POLYGON);
-            glColor3d(0.329, 0.278, 0.356);
-            glVertex2d(657, 434);
-            glVertex2d(657, 501);
-            glVertex2d(635, 514);
-            glVertex2d(635, 446);
-
-        glEnd();
-
-        glBegin(GL_POLYGON);
-            glColor3d(0.380, 0.254, 0.517);
-            glVertex2d(655, 445);
-            glVertex2d(655, 502);
-            glVertex2d(635, 514);
-            glVertex2d(635, 457);
-
-        glEnd();
-
-        glBegin(GL_POLYGON);
-            glColor3d(1, 0.850, 0.474); //ini warna kuning jendela
-            glVertex2d(652.24, 436.16);
-            glVertex2d(652.24, 442.66);
-            glVertex2d(636, 453);
-            glVertex2d(636, 446.5);
-
-        glEnd();
-
-
-        glBegin(GL_POLYGON);
-            glColor3d(1, 1, 1);
-                for(i=0;i<360;i++)
-                {
-                    theta=i*3.142/180;
-                    glVertex2f(2*cos(theta)+638, 2*sin(theta)+483);
-                }
-        glEnd();
 
     glPopMatrix();
 
@@ -617,6 +630,12 @@ void matahari()
         glEnd();
 
         //EKOR
+
+        glPushMatrix();
+
+        glTranslatef(288,158,0);
+        glRotatef(glfwGetTime() * -70, 0, 0, 1);
+        glTranslatef(-288,-158,0);
 
         glBegin(GL_POLYGON);
             glColor3d(1, 0.780, 0.031);
@@ -668,151 +687,350 @@ void matahari()
             glVertex2f(280,49);
         glEnd();
 
+        glBegin(GL_POLYGON);
+            glColor3d(1, 0.780, 0.031);
+            glVertex2f(380,100);
+            glVertex2f(344,121);
+            glVertex2f(344,111);
+            glVertex2f(380,89);
+        glEnd();
+        glPopMatrix();
+
     glPopMatrix();
 
 }
 
 
 
+void bulan()
+{
+    float theta, i;
+    glPushMatrix();
+    glTranslatef(glfwGetTime()*-2,glfwGetTime()*0.5,0);
+    glBegin(GL_POLYGON);
+        glColor3d(0.764, 0.698, 0.662);
+        for(i=0;i<360;i++)
+                {
+                    theta=i*3.142/180;
+                    glVertex2f(47.5*cos(theta)+249, 53.5*sin(theta)+109);
+                }
+    glEnd();
+    glPopMatrix();
+    glPushMatrix();
+    glTranslatef(glfwGetTime()*-2,glfwGetTime()*0.58,0);
+    glBegin(GL_POLYGON);
+        glColor3d(235, 233, 225);
+        for(i=0;i<360;i++)
+                {
+                    theta=i*3.142/180;
+                    glVertex2f(47.5*cos(theta)+261, 53.5*sin(theta)+109);
+                }
+    glEnd();
+    glPopMatrix();
 
-//ini belum kepake
+    glBegin(GL_POLYGON);
+
+        glColor3d(Lred,Lgreen,Lblue);
+        for(i=0;i<360;i++)
+                {
+                    theta=i*3.142/180;
+                    glVertex2f(50*cos(theta)+279, 50*sin(theta)+100);
+                }
+    glEnd();
 
 
-// Switch Button
-class I3{
-public:
-    double x,y;
-    double prevY;
-    int red,green,blue;
-    int size, i;
-    bool tahan;
-    float theta;
-    int merah, hijau, biru;
+}
+
+void pintu(int countP)
+{
+    //pintu
+
+    float theta,i;
+    glPushMatrix();
+
+        glBegin(GL_POLYGON);
+                glColor3d(LampuR,LampuG,LampuB);
+                glVertex2d(657, 434);
+                glVertex2d(657, 501);
+                glVertex2d(635, 514);
+                glVertex2d(635, 446);
+
+            glEnd();
+
+        if(countP%2==1){
+            glBegin(GL_POLYGON);
+                glColor3d(0.329, 0.278, 0.356);
+                glVertex2d(657, 434);
+                glVertex2d(657, 501);
+                glVertex2d(635, 514);
+                glVertex2d(635, 446);
+
+            glEnd();
+
+            glBegin(GL_POLYGON);
+                glColor3d(0.380, 0.254, 0.517);
+                glVertex2d(655, 445);
+                glVertex2d(655, 502);
+                glVertex2d(635, 514);
+                glVertex2d(635, 457);
+
+            glEnd();
+
+            glBegin(GL_POLYGON);
+                glColor3d(LampuR,LampuG,LampuB); //ini warna kuning jendela
+                glVertex2d(652.24, 436.16);
+                glVertex2d(652.24, 442.66);
+                glVertex2d(636, 453);
+                glVertex2d(636, 446.5);
+
+            glEnd();
 
 
-    I3()
-    {
-        prevY = 0;
-        red = 5, green = 59, blue = 99;
-        merah=hijau=biru=214;
-        x=574, y=297;
-        size= 9.5;
-        tahan=false;
-        theta;
+            glBegin(GL_POLYGON);
+                glColor3d(1, 1, 1);
+                    for(i=0;i<360;i++)
+                    {
+                        theta=i*3.142/180;
+                        glVertex2f(2*cos(theta)+638, 2*sin(theta)+483);
+                    }
+            glEnd();
+            //printf("%d",countP);
+            printf(" -> Pintu Tertutup\n");
+            }
+
+        else{
+            glBegin(GL_POLYGON);
+                glColor3d(0.329, 0.278, 0.356);
+                glVertex2d(685, 442);
+                glVertex2d(685, 508);
+                glVertex2d(656.5, 502.5);
+                glVertex2d(656.5, 435);
+
+            glEnd();
+            glBegin(GL_POLYGON);
+                glColor3d(Lred,Lgreen,Lblue);
+                glVertex2d(683, 444.5);
+                glVertex2d(683, 450.5);
+                glVertex2d(658, 444.5);
+                glVertex2d(658, 439);
+
+            glEnd();
+
+            glBegin(GL_POLYGON);
+                glColor3d(0.552, 0.486, 0.901);
+                glVertex2d(665,440);
+                glVertex2d(665, 446);
+                glVertex2d(658, 444.5);
+                glVertex2d(658, 439);
+
+            glEnd();
+
+            glBegin(GL_POLYGON);
+                glColor3d(0.686, 0.666, 0.925);
+                glVertex2d(656,489);
+                glVertex2d(656, 502);
+                glVertex2d(635, 514);
+                glVertex2d(635, 480);
+
+            glEnd();
 
 
-    }
+            printf(" -> Pintu Terbuka\n");
 
 
-    void display()
-    {
+        }
+
+}
+
+//ini tombol
+
+void tombol(int mode)
+{
+    float theta,i;
+    glPushMatrix();
+        glBegin(GL_QUADS);
+
+            glColor3d(Tred,Tgreen,Tblue);
+            glVertex2f(958,74);
+            glVertex2f(958,113);
+            glVertex2f(915,113);
+            glVertex2f(915,74);
+
+        glEnd();
+
+        glBegin(GL_POLYGON);
+            glColor3d(Tred,Tgreen,Tblue);
+            for(i=0;i<360;i++)
+                {
+                    theta=i*3.142/180;
+                    glVertex2f(19.5*cos(theta)+917.5, 19.5*sin(theta)+93.5);
+                }
+        glEnd();
+
+        glBegin(GL_POLYGON);
+            glColor3d(Tred,Tgreen,Tblue);
+            for(i=0;i<360;i++)
+                {
+                    theta=i*3.142/180;
+                    glVertex2f(19.5*cos(theta)+956.5, 19.5*sin(theta)+93.5);
+                }
+        glEnd();
+
+        //ini light mode
+        //gambar matahari
+        glBegin(GL_LINE_STRIP);
+            glColor3d(1, 1, 1);
+            for(i=0;i<360;i++)
+                {
+                    theta=i*3.142/180;
+                    glVertex2f(5*cos(theta)+955, 5*sin(theta)+93.5);
+                }
+        glEnd();
+
+        glBegin(GL_LINE_STRIP);
+
+            glColor3d(1, 1, 1);
+            glVertex2f(955, 82);
+            glVertex2f(955, 87.5);
+
+        glEnd();
+
+        glBegin(GL_LINE_STRIP);
+
+            glColor3d(1, 1, 1);
+            glVertex2f(955, 100);
+            glVertex2f(955, 105.5);
+
+        glEnd();
+
+        glBegin(GL_LINE_STRIP);
+
+            glColor3d(1, 1, 1);
+            glVertex2f(943, 94);
+            glVertex2f(948.5, 94);
+
+        glEnd();
+
+        glBegin(GL_LINE_STRIP);
+
+            glColor3d(1, 1, 1);
+            glVertex2f(966.5, 94);
+            glVertex2f(961, 94);
+
+        glEnd();
+
+
+
+        //ini dark mode
+
+        //ini gambar bulan
+
+        glBegin(GL_LINE_STRIP);
+            glColor3d(1, 1, 1);
+            for(i=0;i<360;i++)
+                {
+                    theta=i*3.142/180;
+                    glVertex2f(12*cos(theta)+927, 12*sin(theta)+93.5);
+                }
+        glEnd();
+
+        glBegin(GL_LINE_STRIP);
+            glColor3d(1, 1, 1);
+            for(i=0;i<360;i++)
+                {
+                    theta=i*3.142/180;
+                    glVertex2f(12*cos(theta)+932, 12*sin(theta)+93.5);
+                }
+        glEnd();
+        glBegin(GL_POLYGON);
+            glColor3d(Tred,Tgreen,Tblue);
+            for(i=0;i<360;i++)
+                {
+                    theta=i*3.142/180;
+                    glVertex2f(12*cos(theta)+933, 13*sin(theta)+93.5);
+                }
+        glEnd();
+
+
+
+
+
+        //ini button putih
 
         glPushMatrix();
-
-
-
-        //ini badan
-       //ini badan
-       glBegin(GL_POLYGON);
-            glColor3ub(red, green, blue);
-            glVertex2f(-size + x,   y-27 ); //Atas Kanan
-            glVertex2f( size + x,   y-27); //Atas Kiri
-            glVertex2f( size + x,  +48+ y); //Bawah Kiri
-            glVertex2f(-size + x,  +48+ y); //Bawah Kanan
-        glEnd();
-
-
-        //Ini Kepala
+        glTranslatef(0-mode,0,0);
         glBegin(GL_POLYGON);
-        for(i=0;i<360;i++)
-        {
-            glColor3ub(red, green, blue);
-            theta=i*3.142/180;
-            glVertex2f((size+2)*cos(theta)+x, (size+2)*sin(theta)+y-48);
-        }
+            glColor3d(1, 1, 1);
+            for(i=0;i<360;i++)
+                {
+                    theta=i*3.142/180;
+                    glVertex2f(16*cos(theta)+955, 15.5*sin(theta)+93.5);
+                }
         glEnd();
-
 
         glPopMatrix();
-    }
 
-    GLboolean isRectangleSelected(double xpos, double ypos)
-    {
-        double left = x - size;
-        double right = x + size;
-        double top = y+size;
-        double bottom =y- size-70;
-
-        if((xpos > left) && (xpos < right) && (ypos < top) && (ypos > bottom))
-            return GL_TRUE;
-        else
-            return GL_FALSE;
+    glPopMatrix();
+}
 
 
-    }
+void awan()
+{
+    glColor3d(Tred,Tgreen,Tblue);
+    float i,theta;
+    glBegin(GL_POLYGON);
 
-    void doIfSelected(double xpos, double ypos)
-    {
-        if(isRectangleSelected(xpos, ypos) == GL_TRUE)
-            {red =61; blue = 132;
-            green = 220;
-            merah=237,hijau=245, biru=224;
-
-                if(tahan==1)
-                {
-                    x=xpos;
-                    y=ypos;
-
-                }
-
-            }
-
-        else
+        for(i=0;i<360;i++)
             {
-                red = 5, green = 59, blue = 99;
-                merah=hijau=biru=214;
-
-
+                theta=i*3.142/180;
+                glVertex2f(18*cos(theta)+288, 19*sin(theta)+288);
             }
-    }
+    glEnd();
 
-    void doIfKeyPressed(int key, int action){}
-    void doIfClicked(int button, int action, double xpos, double ypos){
+    glBegin(GL_POLYGON);
 
-
-            if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS){
-
-                tahan=true;
-
-            }
-            else if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
+        for(i=0;i<360;i++)
             {
-                tahan=false;
-
+                theta=i*3.142/180;
+                glVertex2f(16*cos(theta)+314.5, 16*sin(theta)+277);
             }
+    glEnd();
 
+    glBegin(GL_POLYGON);
 
-    }
-};
-I3 i3;
+        for(i=0;i<360;i++)
+            {
+                theta=i*3.142/180;
+                glVertex2f(10*cos(theta)+338, 11*sin(theta)+270);
+            }
+    glEnd();
 
+    glBegin(GL_POLYGON);
 
+        for(i=0;i<360;i++)
+            {
+                theta=i*3.142/180;
+                glVertex2f(16*cos(theta)+267.5, 16*sin(theta)+304);
+            }
+    glEnd();
 
+    glBegin(GL_POLYGON);
 
+        for(i=0;i<360;i++)
+            {
+                theta=i*3.142/180;
+                glVertex2f(10*cos(theta)+252.5, 11*sin(theta)+322);
+            }
+    glEnd();
 
+    glBegin(GL_QUADS);
+            glVertex2f(336,269);
+            glVertex2f(342,280);
+            glVertex2f(257.5,331);
+            glVertex2f(249.5,315.5);
 
-
-
-
-
-
-
-
-
-
-
-
-
+        glEnd();
+}
 
 /*
  * CALLBACKS FUNCTIONS
@@ -828,7 +1046,7 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
 
-    i3.doIfSelected(xpos, ypos);
+    isRectangleSelected(xpos, ypos);
 
 
 
@@ -840,7 +1058,8 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     double xpos, ypos;
     glfwGetCursorPos(window, &xpos, &ypos);
 
-    i3.doIfClicked(button, action, xpos, ypos);
+
+    //i3.doIfClicked(button, action, xpos, ypos);
     modedoIfClicked(button, action);
 
 }
@@ -855,8 +1074,8 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
  */
 int main(void) {
     //deklarasi variabel
-        int i=0;
-        float n=-20;
+
+        float n=-20,i=0, kecepatan,j;
     /* Creating Windows */
     GLFWwindow* window;
     glfwSetErrorCallback(error_callback);
@@ -875,11 +1094,10 @@ int main(void) {
     glfwSetCursorPosCallback(window, cursor_position_callback);
     glfwSetMouseButtonCallback(window, mouse_button_callback);
 
-
     /* MAIN LOOP */
     while (!glfwWindowShouldClose(window)){
         /* Preparing Frame Creation */
-        float ratio;
+        float ratio,j;
         int width, height;
         glfwGetFramebufferSize(window, &width, &height);
         ratio = width / (float) height;
@@ -890,13 +1108,69 @@ int main(void) {
         glOrtho(0, 1080, 720,0, 1.f, -1.f);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
+        warna();
         display();
 
         /* Object Drawing*/
 
         //i3.display();
+
+        //glPushMatrix();
+         //   for (i=0;i<4;i++)
+          //  {
+          //      glTranslatef(rand()*rand(),-j*i,0);
+          //      awan();
+          //  }
+
+
+        //glPopMatrix();
         rumah();
-        matahari();
+
+        //atur kecepatan
+        kecepatan = 0.5;
+
+        if(count%2==0&&i<=280){
+
+                i+=kecepatan;
+        }
+        else if(count%2==1&&i>0)
+        {
+            i-=kecepatan;
+        }
+
+                glPushMatrix();
+                glTranslatef(0,i*-1,0);
+                bulan();
+                glPopMatrix();
+                glPushMatrix();
+                glTranslatef(0,-280+i,0);
+                matahari();
+                //printf("%f\n",i);
+                glPopMatrix();
+
+        if(count%2==0&&j<36)
+        {
+                j+=0.2;
+
+        }
+        else if(count%2==1&&j>0)
+        {
+                j-=0.2;
+        }
+        tombol(j);
+
+        pintu(countP);
+
+
+
+
+        /*else{
+            glTranslatef(20,50,0);
+        bulan();
+        }*/
+
+
+
 
 
 
@@ -908,6 +1182,7 @@ int main(void) {
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
+
 
     /* Destroying Windows */
     glfwDestroyWindow(window);
